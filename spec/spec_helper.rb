@@ -56,7 +56,8 @@ module MinitestPlugin
     #       3) The HTTP request succeed and are regitered by VCR as fixtures
     #       4) Anonymize each new created VCR fixtures with the credentials available under spec/support/config.yml 
     #          + don't forget to anonymize each creadentials presents in the API response
-    #       5) Run the testing without the MODE environment variable, the fixtures should works
+    #       5) Add the option match_requests_on: [:path] to the VCR#use_cassette method to lock the fixture on next live MODE
+    #       6) Run the testing without the MODE environment variable, the fixtures should works
 
     if ENV['MODE'] == 'live' && File.exist?("#{GEM_ROOT}/conf.yml")
       LimeLm.configure_with("#{GEM_ROOT}/conf.yml") 

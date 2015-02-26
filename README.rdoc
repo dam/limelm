@@ -1,6 +1,6 @@
 = limelm
 
-A Ruby API wrapper to LimeLM (http://wyday.com/limelm/), a license manager  
+A Ruby API wrapper to LimeLM (http://wyday.com/limelm), a license manager  
 
 == Contributing to limelm
  

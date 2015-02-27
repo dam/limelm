@@ -17,11 +17,18 @@ Jeweler::Tasks.new do |gem|
   gem.name = "limelm"
   gem.homepage = "http://github.com/dam/limelm"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{limelm is a Ruby wrapper for the LimeLM JSON API}
+  gem.description = %Q{limelm is a Ruby wrapper for the LimeLM JSON API}
   gem.email = "imberdis.damien@gmail.com"
   gem.authors = ["Damien Imberdis"]
   # dependencies defined in Gemfile
+  gem.add_runtime_dependency 'httparty'
+  gem.add_development_dependency 'webmock'
+  gem.add_development_dependency 'vcr'
+  gem.add_development_dependency 'rdoc', '~> 3.12'
+  gem.add_development_dependency 'bundler', '~> 1.0'
+  gem.add_development_dependency 'jeweler', '~> 2.0.1'
+  gem.add_development_dependency 'simplecov', '>= 0'
 end
 Jeweler::RubygemsDotOrgTasks.new
 

@@ -29,7 +29,6 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'minitest/autorun'
-require 'shoulda'
 require 'webmock/minitest'
 require 'vcr'
 

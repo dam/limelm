@@ -1,12 +1,12 @@
 module LimeLm
   class Key
-  	attr_reader :id
-  	attr_reader :key
-  	attr_reader :version_id
-  	attr_reader :email
+    attr_reader :id
+    attr_reader :key
+    attr_reader :version_id
+    attr_reader :email
     attr_reader :properties  	
 
-  	def initialize(hash)
+    def initialize(hash)
       self.send(:assign_properties, hash)
       raise LimeLm::InvalidObject, 'You need to provide at least an id or a key for the LimeLm::Key object' unless @id || @key
     end
@@ -56,8 +56,6 @@ module LimeLm
       response = LimeLm::Connection.post_json({ method: 'limelm.pkey.delete', pkey_id: @id })
       true
     end
-
-    #TODO: revoke + reenable key
 
     private
 

@@ -22,7 +22,102 @@ describe LimeLm::Key do
     end
 
     it 'including all custom license fields and tags' do
-      #TODO 
+      VCR.use_cassette("details_for_a_given_key_with_tags", match_requests_on: [:path]) do
+        key = LimeLm::Key.new({ 'id' => '1' })
+        result = key.details
+        assert_equal [{"name"=>"enterprise"}, {"name"=>"demo"}], result['tags']['tag']
+      end
+    end
+  end
+  
+  describe '#id' do 
+    it 'returns the id property if already present in the object' do 
+      key = LimeLm::Key.new({ 'id' => '1' })
+      assert_equal '1', key.id
+    end
+
+    it 'calls the API, save the id property and returns it if only the product key is present' do 
+      VCR.use_cassette("id_for_a_given_key", match_requests_on: [:path]) do
+        key = LimeLm::Key.new({ 'key' => 'AAAA-BBBB' })
+        assert_equal '1', key.id
+      end
+    end
+  end
+
+  describe '#tag' do
+    it 'sets a key tags providing an Array' do
+      VCR.use_cassette("set_tags_for_a_given_key", match_requests_on: [:path]) do
+        key = LimeLm::Key.new({ 'id' => '1' }) 
+        tags = ['demo', 'enterprise']
+        assert key.tag(tags), 'returns true if success'
+      end
+    end
+  end
+
+  describe '#remove_tag' do 
+    it 'removes the specialized tag' do 
+      VCR.use_cassette("remove_tag_for_a_given_key", match_requests_on: [:path]) do
+        key = LimeLm::Key.new({ 'id' => '1' }) 
+        assert key.remove_tag('demo'), 'returns true if success'
+      end
+    end
+  end
+
+  describe '#update' do 
+    #TODO: https://wyday.com/limelm/help/api/limelm.pkey.setDetails/
+  end 
+
+  describe '.create' do 
+    it 'creates a new default product key' do 
+      VCR.use_cassette("create_key_default_configuration", match_requests_on: [:path]) do
+        result = LimeLm::Key.create
+        assert_equal 1, result.count, 'Should build an uniq key by default'
+        new_key = result.first
+        assert_instance_of LimeLm::Key, new_key
+        assert_equal '9', new_key.id
+        assert_equal 'CCCC-BBBB', new_key.key
+        assert new_key.version_id, 'version_id is set to the default configuration'
+      end
+    end
+
+    it 'associates keys to an email and can generate more than a key' do 
+      VCR.use_cassette("create_keys_with_email", match_requests_on: [:path]) do
+        email = 'imberdis.damien@gmail.com'
+
+        result = LimeLm::Key.create(email: email, num_keys: 2)
+        assert_equal 2, result.count
+
+        first_key, second_key = result.first, result.last
+        assert_instance_of LimeLm::Key, first_key
+        assert_instance_of LimeLm::Key, second_key
+
+        assert_equal email, first_key.email
+        assert_equal email, second_key.email
+      end
+    end
+
+    it 'accepts the creation of a new key, specifying a product version_id (not using the default configuration)' do 
+      skip
+    end
+
+    it 'accept more detailed configuration' do 
+      skip
+    end
+  end
+
+  describe '#destroy!' do 
+    it 'deletes a key' do 
+      VCR.use_cassette("destroy_key", match_requests_on: [:path]) do
+        key_to_destroy = LimeLm::Key.new({ 'id' => '1' })
+        assert key_to_destroy.destroy!, 'Should return true if key deleted'
+      end
+    end
+
+    it 'raises error if try to delete a key out of my version_id' do 
+      VCR.use_cassette("destroy_random_key", match_requests_on: [:path]) do
+        key_to_destroy = LimeLm::Key.new({ 'id' => '3' })
+        assert_raises(LimeLm::ApiError) { key_to_destroy.destroy! }   
+      end
     end
   end
  

@@ -46,8 +46,6 @@ VCR.configure do |c|
   c.hook_into :webmock
 end
 
-
-# TODO: only if passing live mode
 module MinitestPlugin
   def before_setup
     # NOTE: As LimeLM doesn't provide a demo environment, we have to make the following tricks:

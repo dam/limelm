@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://wyday.com/limelm/api/rest?api_key=new_key_from_yaml&deact_limit=2&email=imberdis.damien@gmail.com&format=json&method=limelm.pkey.generate&num_acts=5&version_id=1
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 02 Mar 2015 17:39:54 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - PHPSESSID=pt3g74k2rvkoa17p49b8sf8871; path=/
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: jsonLimeLMApi({"stat":"ok","pkeys":{"total":1,"pkey":[{"id":"9","key":"CCCC-EEEE"}]}})
+    http_version: 
+  recorded_at: Mon, 02 Mar 2015 17:39:54 GMT
+recorded_with: VCR 2.9.3

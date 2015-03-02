@@ -7,9 +7,17 @@ describe LimeLm::Key do
       LimeLm::Key.new({ 'id' => '1' })
       LimeLm::Key.new({ 'key' => 'AAAA-BBBB' })
     end
+
+    it 'sets default object attributes' do 
+      key = LimeLm::Key.new({ 'id' => '1', 'key' => 'AAA-BBB', 'version_id' => '1',
+        'email' => 'imberdis.damien@gmail.com' })
+      assert_equal 'imberdis.damien@gmail.com', key.email
+      assert_equal 'AAA-BBB', key.key
+      assert_equal '1', key.version_id
+      assert !key.revoked, 'A key is not revoked by default'
+    end
   end
   
-
   describe '#details' do 
     it 'assigns properties of a key and returns them' do 
       VCR.use_cassette("details_for_a_given_key", match_requests_on: [:path]) do
@@ -67,6 +75,26 @@ describe LimeLm::Key do
     #TODO: https://wyday.com/limelm/help/api/limelm.pkey.setDetails/
   end 
 
+  describe '#toggle_revoke!' do 
+    it 'calls the API and set revoked to true in case of success for a non revoked key' do 
+      VCR.use_cassette("revoke_key", match_requests_on: [:path]) do
+        key = LimeLm::Key.new({ 'id' => '1' }) 
+        assert !key.revoked, 'By default a key is not revoked after its initialization'
+        key.toggle_revoke!
+        assert key.revoked, 'The key is revoked if succeed'
+      end
+    end
+
+    it 'calls the API and unrevoke the key' do 
+      VCR.use_cassette("unrevoke_key", match_requests_on: [:path]) do
+        key = LimeLm::Key.new({ 'id' => '1', 'revoked' => true }) 
+        assert key.revoked, 'the key should be revoked'
+        key.toggle_revoke!
+        assert !key.revoked, 'Unrevoke the key'
+      end
+    end
+  end
+
   describe '.create' do 
     it 'creates a new default product key' do 
       VCR.use_cassette("create_key_default_configuration", match_requests_on: [:path]) do
@@ -96,12 +124,21 @@ describe LimeLm::Key do
       end
     end
 
-    it 'accepts the creation of a new key, specifying a product version_id (not using the default configuration)' do 
-      skip
+    it 'accept more detailed configuration about the limitation of activations/deactivations' do 
+      VCR.use_cassette("create_detailed_key", match_requests_on: [:path]) do 
+        email = 'imberdis.damien@gmail.com'
+
+        result = LimeLm::Key.create(email: email, num_acts: 5, deact_limit: 2)
+        assert '9', result.first.id
+        assert 'CCCC-EEEE', result.first.key
+      end
     end
 
-    it 'accept more detailed configuration' do 
-      skip
+    it 'accepts the creation of a new key, specifying a product version_id (not using the default configuration)' do 
+      VCR.use_cassette("create_key_new_version", match_requests_on: [:path]) do
+        result = LimeLm::Key.create(version_id: '2')
+        assert_equal '2', result.first.version_id
+      end
     end
   end
 

@@ -4,6 +4,7 @@ module LimeLm
     attr_reader :key
     attr_reader :version_id
     attr_reader :email
+    attr_reader :revoked
     attr_reader :properties  	
 
     def initialize(hash)
@@ -57,6 +58,12 @@ module LimeLm
       true
     end
 
+    def toggle_revoke!
+      revoke = @revoked ? 'false' : 'true'
+      response = LimeLm::Connection.post_json({ method: 'limelm.pkey.revoke', pkey_id: @id, revoke: revoke })
+      @revoked = !@revoked
+    end
+
     private
 
     def assign_properties(hash)
@@ -64,6 +71,7 @@ module LimeLm
       @key        = hash['key']
       @version_id = hash['version_id']
       @email      = hash['email']
+      @revoked    = hash['revoked'] || false
       @properties = hash
     end
   end

@@ -45,8 +45,10 @@ VCR.configure do |c|
   c.hook_into :webmock
 end
 
-module MinitestPlugin
+module LimeLmConfigurationSetup
   def before_setup
+    super
+
     # NOTE: As LimeLM doesn't provide a demo environment, we have to make the following tricks:
     #       1) Add personal credentials configuration to the file conf.yml, verify that this file is not version controlled
     #       2) Run your tests with the environment variable MODE sets to 'live': bundle exec rake spec MODE=live
@@ -55,7 +57,6 @@ module MinitestPlugin
     #          + don't forget to anonymize each creadentials presents in the API response
     #       5) Add the option match_requests_on: [:path] to the VCR#use_cassette method to lock the fixture on next live MODE
     #       6) Run the testing without the MODE environment variable, the fixtures should works
-
     if ENV['MODE'] == 'live' && File.exist?("#{GEM_ROOT}/conf.yml")
       LimeLm.configure_with("#{GEM_ROOT}/conf.yml") 
     else 
@@ -64,6 +65,6 @@ module MinitestPlugin
   end
 end
 
-class MiniTest::Test
-  include MinitestPlugin
+class MiniTest::Unit::TestCase
+  include LimeLmConfigurationSetup
 end

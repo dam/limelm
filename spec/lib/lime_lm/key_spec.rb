@@ -177,4 +177,36 @@ describe LimeLm::Key do
       end
     end
   end
+
+  describe '.search' do 
+    it 'returns by default 20 keys of all products and versions' do 
+      VCR.use_cassette("default_search", match_requests_on: [:path]) do
+        result = LimeLm::Key.search
+        
+        # NOTE: the next values are only set for the purpose of a test
+        assert_equal 2, result.count
+        first_key, last_key = result.first, result.last
+
+        assert_instance_of LimeLm::Key, first_key
+        assert_equal '1', first_key.id
+        assert_equal '1', first_key.version_id
+
+        assert_instance_of LimeLm::Key, last_key
+        assert_equal '2', last_key.id
+        assert_equal '4', last_key.version_id
+      end 
+    end
+
+    it 'paginates the result returned' do 
+      VCR.use_cassette("default_search_pagination", match_requests_on: [:path]) do
+        result = LimeLm::Key.search(num: 2, page: 3)   
+        assert_equal 2, result.count
+
+        first_key = result.first
+        assert_instance_of LimeLm::Key, first_key
+        assert_equal '10', first_key.id
+        assert_equal '2', first_key.version_id
+      end
+    end
+  end
 end

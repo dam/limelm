@@ -1,6 +1,6 @@
 module LimeLm
   class Feature
-  	attr_reader :id
+    attr_reader :id
     attr_reader :name
     attr_reader :type
     attr_reader :ta_readable
@@ -11,13 +11,13 @@ module LimeLm
       self.send(:assign_properties, hash)
     end
 
-  	class << self
-  	  def create(params={})
+    class << self
+      def create(params={})
         version_id = params.delete(:version_id) { LimeLm.config[:version_id] }
 
         response = LimeLm::Connection.post_json({ method: 'limelm.feature.add', version_id: version_id }.merge!(params))
         additional_info = LimeLm::Utils.stringify_keys(params)
-        additional_info['type'] = 'string' unless additional_info['type']
+        additional_info['type'] = 'string' unless additional_info['type'] 
         additional_info['required'] = 'true' unless additional_info['required']
         additional_info['ta_readable'] = 'true' unless additional_info['ta_readable']
 
@@ -30,17 +30,17 @@ module LimeLm
         response = LimeLm::Connection.post_json({ method: 'limelm.feature.getAll', version_id: version_id})
         response['fields']['field'].map { |f| new(f) }
       end
-  	end
+    end
 
     def update!(params={})
       #TODO
     end
 
-  	def destroy!
+    def destroy!
       #TODO
-  	end
+    end
 
-  	private
+    private
 
     def assign_properties(hash)
       @id          = hash['id']

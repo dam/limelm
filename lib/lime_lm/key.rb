@@ -17,8 +17,7 @@ module LimeLm
         version_id = params.delete(:version_id) { LimeLm.config[:version_id] }
 
         response = LimeLm::Connection.post_json({ method: 'limelm.pkey.generate', version_id: version_id }.merge!(params))
-        additional_info = { 'version_id' => version_id }
-        additional_info['email'] = params[:email]  if params[:email]
+        additional_info = LimeLm::Utils.stringify_keys(params.merge!({ version_id: version_id }))
         response['pkeys']['pkey'].map { |k| new(k.merge!(additional_info)) }
       end
 
@@ -27,6 +26,11 @@ module LimeLm
 
       	response = LimeLm::Connection.post_json({ method: 'limelm.pkey.find', version_id: version_id, email: email })
         response['pkeys']['pkey'].map { |k| new(k.merge!({ 'version_id' => version_id, 'email' => email })) } 
+      end
+
+      def search(params={})
+        response = LimeLm::Connection.post_json({ method: 'limelm.pkey.advancedSearch'}.merge!(params))
+        response['pkeys']['pkey'].map { |k| new(k) }
       end
     end
 

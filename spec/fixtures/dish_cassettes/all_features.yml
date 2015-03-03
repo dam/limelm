@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://wyday.com/limelm/api/rest?api_key=new_key_from_yaml&format=json&method=limelm.feature.getAll&version_id=2
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 02 Mar 2015 20:48:12 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - PHPSESSID=ke6eo48cpqivqd61u1pd8r3b54; path=/
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: jsonLimeLMApi({"stat":"ok","fields":{"field":[{"id":"1","name":"updates_expires","type":"date_time","ta_readable":"true","required":"false","description":"Date
+        when the license key expires."}]}})
+    http_version: 
+  recorded_at: Mon, 02 Mar 2015 20:48:12 GMT
+recorded_with: VCR 2.9.3

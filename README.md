@@ -35,14 +35,14 @@ LimeLm::Key.find('imberdis.damien@gmail.com', version_id: '1')
 ```
 
 ## API endpoints not developed yet
-
+* [deactivate a specific activation](https://wyday.com/limelm/help/api/limelm.pkey.deactivate/)
 * [manual offline activation of a key](https://wyday.com/limelm/help/api/limelm.pkey.manualActivation/)
 * [manual offline deactivation of a key](https://wyday.com/limelm/help/api/limelm.pkey.manualDeactivation/)
 * [trial extension CRUD operation](https://wyday.com/limelm/help/api/)
 * [Gets the activity of a product version between a date range](https://wyday.com/limelm/help/api/limelm.pkey.activity/)
 * [Remove a tag from all product keys](https://wyday.com/limelm/help/api/limelm.tag.delete/)
 
-## Contributing to limelm
+## Contribute to limelm
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.

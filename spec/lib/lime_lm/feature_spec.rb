@@ -57,4 +57,30 @@ describe LimeLm::Feature do
       end
     end
   end 
+
+  describe '#update!' do 
+    it 'updates features properties and returns true in case of success' do 
+      VCR.use_cassette("update_custom_feature", match_requests_on: [:path]) do
+        feature = LimeLm::Feature.new(id: '3')
+        result = feature.update!(name: 'updated_name', required: 'true',
+          ta_readable: 'false', description: 'updated_description')
+        
+        assert feature, 'Returns true if update succeed'
+        assert_equal '3', feature.id
+        assert_equal 'updated_name', feature.name
+        assert_equal 'updated_description', feature.description
+        assert feature.required
+        assert !feature.ta_readable  
+      end
+    end
+  end
+
+  describe '#destroy!' do 
+    it 'returns true if the feature has been destroyed' do 
+      VCR.use_cassette("destroy_feature", match_requests_on: [:path]) do
+        feature = LimeLm::Feature.new(id: '3')
+        assert feature.destroy!, 'Destroy should work'
+      end
+    end  
+  end
 end

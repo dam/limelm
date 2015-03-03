@@ -43,12 +43,12 @@ module LimeLm
     end
 
     def tag(tags=[])
-      response = LimeLm::Connection.post_json({ method: 'limelm.pkey.setTags', pkey_id: @id, tag: tags })
+      LimeLm::Connection.post_json({ method: 'limelm.pkey.setTags', pkey_id: @id, tag: tags })
       true
     end 
     
     def remove_tag(tag)
-      response = LimeLm::Connection.post_json({ method: 'limelm.pkey.removeTag', pkey_id: @id, tag: tag })
+      LimeLm::Connection.post_json({ method: 'limelm.pkey.removeTag', pkey_id: @id, tag: tag })
       true
     end
 
@@ -58,19 +58,20 @@ module LimeLm
     end
 
     def destroy!
-      response = LimeLm::Connection.post_json({ method: 'limelm.pkey.delete', pkey_id: @id })
+      LimeLm::Connection.post_json({ method: 'limelm.pkey.delete', pkey_id: @id })
       true
     end
 
     def toggle_revoke!
       revoke = @revoked ? 'false' : 'true'
-      response = LimeLm::Connection.post_json({ method: 'limelm.pkey.revoke', pkey_id: @id, revoke: revoke })
+      LimeLm::Connection.post_json({ method: 'limelm.pkey.revoke', pkey_id: @id, revoke: revoke })
       @revoked = !@revoked
     end
 
     private
 
     def assign_properties(hash)
+      hash        = LimeLm::Utils.stringify_keys(hash)
       @id         = hash['id']
       @key        = hash['key']
       @version_id = hash['version_id']

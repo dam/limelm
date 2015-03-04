@@ -11,28 +11,39 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Damien Imberdis"]
-  s.date = "2015-03-02"
+  s.date = "2015-03-04"
   s.description = "limelm is a Ruby wrapper for the LimeLM JSON API"
   s.email = "imberdis.damien@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "TODO.md",
     "VERSION",
     "lib/lime_lm/connection.rb",
     "lib/lime_lm/exceptions.rb",
+    "lib/lime_lm/feature.rb",
     "lib/lime_lm/key.rb",
+    "lib/lime_lm/utils.rb",
     "lib/limelm.rb",
+    "limelm.gemspec",
+    "spec/fixtures/dish_cassettes/all_features.yml",
+    "spec/fixtures/dish_cassettes/create_custom_feature.yml",
+    "spec/fixtures/dish_cassettes/create_detailed_key.yml",
     "spec/fixtures/dish_cassettes/create_key_default_configuration.yml",
+    "spec/fixtures/dish_cassettes/create_key_new_version.yml",
     "spec/fixtures/dish_cassettes/create_keys_with_email.yml",
+    "spec/fixtures/dish_cassettes/create_product_default_feature.yml",
+    "spec/fixtures/dish_cassettes/default_search.yml",
+    "spec/fixtures/dish_cassettes/default_search_pagination.yml",
+    "spec/fixtures/dish_cassettes/destroy_feature.yml",
     "spec/fixtures/dish_cassettes/destroy_key.yml",
     "spec/fixtures/dish_cassettes/destroy_random_key.yml",
     "spec/fixtures/dish_cassettes/details_for_a_given_key.yml",
@@ -40,7 +51,11 @@ Gem::Specification.new do |s|
     "spec/fixtures/dish_cassettes/find_keys_by_email.yml",
     "spec/fixtures/dish_cassettes/id_for_a_given_key.yml",
     "spec/fixtures/dish_cassettes/remove_tag_for_a_given_key.yml",
+    "spec/fixtures/dish_cassettes/revoke_key.yml",
     "spec/fixtures/dish_cassettes/set_tags_for_a_given_key.yml",
+    "spec/fixtures/dish_cassettes/unrevoke_key.yml",
+    "spec/fixtures/dish_cassettes/update_custom_feature.yml",
+    "spec/lib/lime_lm/feature_spec.rb",
     "spec/lib/lime_lm/key_spec.rb",
     "spec/lib/limelm_spec.rb",
     "spec/spec_helper.rb"

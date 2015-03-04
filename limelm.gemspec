@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.authors = ["Damien Imberdis"]
   s.date = "2015-03-04"
-  s.description = "limelm is a Ruby wrapper for the LimeLM JSON API. LimeLM is a powerfull Licence and Online Activation Manager"
+  s.description = "limelm is a Ruby wrapper for the LimeLM JSON API. LimeLM is a powerfull License and Online Activation Manager"
   s.email = "imberdis.damien@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -70,50 +70,20 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<httparty>, [">= 0"])
-      s.add_development_dependency(%q<webmock>, [">= 0"])
-      s.add_development_dependency(%q<vcr>, [">= 0"])
-      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_development_dependency(%q<rdoc>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 2.0.1"])
-      s.add_development_dependency(%q<simplecov>, [">= 0"])
-      s.add_runtime_dependency(%q<httparty>, [">= 0.13.3", "~> 0.13.3"])
-      s.add_development_dependency(%q<webmock>, ["~> 1.20.4"])
-      s.add_development_dependency(%q<vcr>, ["~> 2.9.3"])
-      s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0"])
-      s.add_development_dependency(%q<jeweler>, [">= 2.0.1"])
-      s.add_development_dependency(%q<simplecov>, [">= 0.9.2"])
     else
       s.add_dependency(%q<httparty>, [">= 0"])
-      s.add_dependency(%q<webmock>, [">= 0"])
-      s.add_dependency(%q<vcr>, [">= 0"])
-      s.add_dependency(%q<rdoc>, ["~> 3.12"])
+      s.add_dependency(%q<rdoc>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0"])
       s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
-      s.add_dependency(%q<simplecov>, [">= 0"])
-      s.add_dependency(%q<httparty>, [">= 0.13.3", "~> 0.13.3"])
-      s.add_dependency(%q<webmock>, ["~> 1.20.4"])
-      s.add_dependency(%q<vcr>, ["~> 2.9.3"])
-      s.add_dependency(%q<rdoc>, ["~> 3.12"])
-      s.add_dependency(%q<bundler>, ["~> 1.0"])
-      s.add_dependency(%q<jeweler>, [">= 2.0.1"])
-      s.add_dependency(%q<simplecov>, [">= 0.9.2"])
     end
   else
     s.add_dependency(%q<httparty>, [">= 0"])
-    s.add_dependency(%q<webmock>, [">= 0"])
-    s.add_dependency(%q<vcr>, [">= 0"])
-    s.add_dependency(%q<rdoc>, ["~> 3.12"])
+    s.add_dependency(%q<rdoc>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0"])
     s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
-    s.add_dependency(%q<simplecov>, [">= 0"])
-    s.add_dependency(%q<httparty>, [">= 0.13.3", "~> 0.13.3"])
-    s.add_dependency(%q<webmock>, ["~> 1.20.4"])
-    s.add_dependency(%q<vcr>, ["~> 2.9.3"])
-    s.add_dependency(%q<rdoc>, ["~> 3.12"])
-    s.add_dependency(%q<bundler>, ["~> 1.0"])
-    s.add_dependency(%q<jeweler>, [">= 2.0.1"])
-    s.add_dependency(%q<simplecov>, [">= 0.9.2"])
   end
 end
 

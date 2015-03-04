@@ -1,6 +1,6 @@
 # limelm
 
-A Ruby API wrapper for the LimeLM API. LimeLM is a powerfull Licence and Online Activation Manager. For more information, see: http://wyday.com/limelm/
+A Ruby API wrapper for the LimeLM API. LimeLM is a powerfull License and Online Activation Manager. For more information, see: http://wyday.com/limelm/
 
 Documentation for the LimeLM API can be found here: https://wyday.com/limelm/help/api/
 

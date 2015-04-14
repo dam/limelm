@@ -39,7 +39,6 @@ LimeLm::Key.find('imberdis.damien@gmail.com', version_id: '1')
 * [manual offline activation of a key](https://wyday.com/limelm/help/api/limelm.pkey.manualActivation/)
 * [manual offline deactivation of a key](https://wyday.com/limelm/help/api/limelm.pkey.manualDeactivation/)
 * [trial extension CRUD operation](https://wyday.com/limelm/help/api/)
-* [Gets the activity of a product version between a date range](https://wyday.com/limelm/help/api/limelm.pkey.activity/)
 * [Remove a tag from all product keys](https://wyday.com/limelm/help/api/limelm.tag.delete/)
 
 ## Contribute to limelm
@@ -58,10 +57,10 @@ All tests can be run by the command `rake spec`. By default, all the API request
 
 As LimeLM not providing yet a demo environment, you will need to use your own product version to implement new functionalities:
 
-* create a conf.yml file under the project root directory that will containes your personal `api_ key` and `version_id`.
-* nether share that file via your source control tool.
-* write new test (cf. other tests as examples on how to use VCR for mocking the HTTP requests), launch them with the command `rake spec MODE=live`.
-* Once VCR generated the fixtures, anonymize them (replace every api_key, version_id, key ids and values by fake data).
+* create a conf.yml file under the project root directory that will contain your personal credentials `api_key` and `version_id`.
+* never share that file via your source control tool.
+* write a new test (cf. other tests as examples on how to use VCR for mocking the HTTP requests), launch them with the command `rake spec MODE=live`.
+* Once VCR generated the fixtures, anonymize all credentials (replace every api_key, version_id, key ids and values by fake data).
 
 
 ## Disclaimer

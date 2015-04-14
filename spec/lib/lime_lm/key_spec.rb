@@ -209,4 +209,24 @@ describe LimeLm::Key do
       end
     end
   end
+
+  describe '.activity' do
+    it 'returns the activity of a product version for the last week by default' do 
+      VCR.use_cassette("default_activity", match_requests_on: [:path]) do
+        result = LimeLm::Key.activity(version_id: '1')
+        assert result.is_a?(Array)
+        key_info = result.first
+        assert_equal '1', key_info["id"] 
+        assert_equal "AAAA", key_info['key']
+        assert_equal "5", key_info['acts']
+      end 
+    end
+
+    it 'returns an empty array if no activity results found' do 
+      VCR.use_cassette("no_activity", match_requests_on: [:path]) do
+        result = LimeLm::Key.activity
+        assert_equal [], result
+      end
+    end
+  end
 end

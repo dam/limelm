@@ -1,3 +1,5 @@
+require 'date'
+
 module LimeLm
   class Key
     attr_reader :id
@@ -31,6 +33,18 @@ module LimeLm
       def search(params={})
         response = LimeLm::Connection.post_json({ method: 'limelm.pkey.advancedSearch'}.merge!(params))
         response['pkeys']['pkey'].map { |k| new(k) }
+      end
+
+      # Returns by default activity of created product keys only to speed up the query
+      # Pass optional activity as parameters. Asking for activity of all the products takes a long process time
+      def activity(params={})
+        version_id = params.delete(:version_id) { LimeLm.config[:version_id] }
+        start = params.delete(:start) { (Date.today - 7).strftime('%Y-%m-%d') }
+
+        response = LimeLm::Connection.post_json({ method: 'limelm.pkey.activity', version_id: version_id, start: start, created: true}.merge!(params))
+        response['pkeys']['pkey']
+      rescue LimeLm::ApiError => e
+        e.message.include?('109') ? [] : raise(e)
       end
     end
 

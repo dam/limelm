@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://wyday.com/limelm/api/rest?act_req_xml=%3Chello%3E%0A%3C/hello%3E&api_key=18pg92054ecbfc9215588.24249951&format=json&method=limelm.pkey.manualActivation
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 24 Apr 2015 19:04:39 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - PHPSESSID=b8l87d7vstrgossogfbekr7j76; path=/
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: jsonLimeLMApi({"stat":"fail","code":103,"message":"Product version id
+        is invalid."})
+    http_version: 
+  recorded_at: Fri, 24 Apr 2015 19:04:39 GMT
+recorded_with: VCR 2.9.3

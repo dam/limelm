@@ -229,4 +229,23 @@ describe LimeLm::Key do
       end
     end
   end
+
+  describe '.manual_activation' do
+    it 'returns an error if the activation request is invalid' do 
+      VCR.use_cassette("invalid_activation_request", match_requests_on: [:path]) do
+        file_path = File.expand_path('../../../support/invalid_activation_request_file.xml', __FILE__)
+        unvalid_content = File.open(file_path, 'r').read   
+        assert_raises(LimeLm::ApiError) { LimeLm::Key.manual_activation(unvalid_content) }
+      end
+    end
+
+    it 'returns the offline activation response content in case of success' do 
+       VCR.use_cassette("valid_activation_request", match_requests_on: [:path]) do
+        file_path = File.expand_path('../../../support/activation_request_file.xml', __FILE__)
+        valid_content = File.open(file_path, 'r').read
+        result = LimeLm::Key.manual_activation(valid_content)
+        assert result.is_a?(String)
+      end
+    end
+  end
 end

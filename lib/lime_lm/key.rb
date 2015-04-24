@@ -46,6 +46,11 @@ module LimeLm
       rescue LimeLm::ApiError => e
         e.message.include?('109') ? [] : raise(e)
       end
+
+      def manual_activation(act_req_content)
+        response = LimeLm::Connection.post_json({ method: 'limelm.pkey.manualActivation', act_req_xml: act_req_content})
+        response['act_resp_xml']['data']    
+      end
     end
 
     def id(params={})

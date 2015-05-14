@@ -51,6 +51,10 @@ module LimeLm
         response = LimeLm::Connection.post_json({ method: 'limelm.pkey.manualActivation', act_req_xml: act_req_content})
         response['act_resp_xml']['data']    
       end
+
+      def manual_deactivation(deact_req_content)
+        response = LimeLm::Connection.post_json({ method: 'limelm.pkey.manualDeactivation', deact_req_xml: deact_req_content})
+      end
     end
 
     def id(params={})

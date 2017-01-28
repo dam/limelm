@@ -92,6 +92,7 @@ module LimeLm
     end
 
     def update(params)
+      id if @id.nil?
       LimeLm::Connection.post_json({ method: 'limelm.pkey.setDetails', pkey_id: @id }.merge!(params))
     end
 
